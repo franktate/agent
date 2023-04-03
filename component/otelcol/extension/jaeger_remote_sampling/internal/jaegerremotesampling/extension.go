@@ -22,6 +22,7 @@ import (
 	"github.com/jaegertracing/jaeger/cmd/collector/app/sampling/strategystore"
 	"github.com/jaegertracing/jaeger/plugin/sampling/strategystore/static"
 	"go.opentelemetry.io/collector/component"
+	otelextension "go.opentelemetry.io/collector/extension"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
@@ -29,7 +30,7 @@ import (
 	"github.com/grafana/agent/component/otelcol/extension/jaeger_remote_sampling/internal/strategy_store"
 )
 
-var _ component.Extension = (*jrsExtension)(nil)
+var _ otelextension.Extension = (*jrsExtension)(nil)
 
 type jrsExtension struct {
 	cfg       *Config

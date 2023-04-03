@@ -71,7 +71,7 @@ var (
 //
 // The registered component must be registered to export the
 // otelcol.ConsumerExports type, otherwise New will panic.
-func New(opts component.Options, f otelcomponent.ProcessorFactory, args Arguments) (*Processor, error) {
+func New(opts component.Options, f otelprocessor.Factory, args Arguments) (*Processor, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	consumer := lazyconsumer.New(ctx)

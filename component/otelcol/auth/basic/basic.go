@@ -7,6 +7,7 @@ import (
 	"github.com/grafana/agent/pkg/flow/rivertypes"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension"
 	otelcomponent "go.opentelemetry.io/collector/component"
+	otelextension "go.opentelemetry.io/collector/extension"
 )
 
 func init() {
@@ -35,7 +36,6 @@ var _ auth.Arguments = Arguments{}
 // Convert implements auth.Arguments.
 func (args Arguments) Convert() (otelcomponent.Config, error) {
 	return &basicauthextension.Config{
-		ExtensionSettings: otelcomponent.NewExtensionConfigSettings(otelcomponent.NewID("basic")),
 		ClientAuth: &basicauthextension.ClientAuthSettings{
 			Username: args.Username,
 			Password: string(args.Password),
@@ -44,11 +44,11 @@ func (args Arguments) Convert() (otelcomponent.Config, error) {
 }
 
 // Extensions implements auth.Arguments.
-func (args Arguments) Extensions() map[otelcomponent.ID]otelcomponent.Extension {
+func (args Arguments) Extensions() map[otelcomponent.ID]otelextension.Extension {
 	return nil
 }
 
 // Exporters implements auth.Arguments.
-func (args Arguments) Exporters() map[otelcomponent.DataType]map[otelcomponent.ID]otelcomponent.Exporter {
+func (args Arguments) Exporters() map[otelcomponent.DataType]map[otelcomponent.ID]otelcomponent.Component {
 	return nil
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/grafana/agent/pkg/river"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/sigv4authextension"
 	otelcomponent "go.opentelemetry.io/collector/component"
-	otelconfig "go.opentelemetry.io/collector/config"
+	otelextension "go.opentelemetry.io/collector/extension"
 )
 
 func init() {
@@ -35,9 +35,9 @@ var (
 )
 
 // Convert implements auth.Arguments.
-func (args Arguments) Convert() (otelconfig.Extension, error) {
+func (args Arguments) Convert() (otelextension.Extension, error) {
 	res := sigv4authextension.Config{
-		ExtensionSettings: otelconfig.NewExtensionSettings(otelconfig.NewComponentID("sigv4")),
+		ExtensionSettings: otelcomponent.NewExtensionConfigSettings(otelcomponent.NewID("sigv4")),
 		Region:            args.Region,
 		Service:           args.Service,
 		AssumeRole:        *args.AssumeRole.Convert(),
@@ -61,12 +61,12 @@ func (args *Arguments) UnmarshalRiver(f func(interface{}) error) error {
 }
 
 // Extensions implements auth.Arguments.
-func (args Arguments) Extensions() map[otelconfig.ComponentID]otelcomponent.Extension {
+func (args Arguments) Extensions() map[otelcomponent.ComponentID]otelextension.Extension {
 	return nil
 }
 
 // Exporters implements auth.Arguments.
-func (args Arguments) Exporters() map[otelconfig.DataType]map[otelconfig.ComponentID]otelcomponent.Exporter {
+func (args Arguments) Exporters() map[otelcomponent.DataType]map[otelcomponent.ComponentID]otelcomponent.Exporter {
 	return nil
 }
 
