@@ -145,10 +145,10 @@ require (
 	github.com/wk8/go-ordered-map v0.2.0
 	github.com/xdg-go/scram v1.1.2
 	go.opencensus.io v0.24.0
-	go.opentelemetry.io/collector v0.74.0
+	go.opentelemetry.io/collector v0.75.0
 	go.opentelemetry.io/collector/exporter/otlpexporter v0.73.0
 	go.opentelemetry.io/collector/pdata v1.0.0-rc9
-	go.opentelemetry.io/collector/semconv v0.73.0
+	go.opentelemetry.io/collector/semconv v0.75.0
 	go.opentelemetry.io/contrib/instrumentation/github.com/gorilla/mux/otelmux v0.36.4
 	go.opentelemetry.io/otel v1.14.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.14.0
@@ -425,7 +425,7 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0 // indirect
 	github.com/karrick/godirwalk v1.16.1 // indirect
 	github.com/kevinburke/ssh_config v1.1.0 // indirect
-	github.com/klauspost/compress v1.16.0 // indirect
+	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/knadh/koanf v1.5.0 // indirect
 	github.com/kolo/xmlrpc v0.0.0-20220921171641-a4b6fa1dd06b // indirect
 	github.com/krallistic/kazoo-go v0.0.0-20170526135507-a15279744f4e // indirect
@@ -570,19 +570,19 @@ require (
 	go.etcd.io/etcd/client/pkg/v3 v3.5.6 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.6 // indirect
 	go.mongodb.org/mongo-driver v1.11.0 // indirect
-	go.opentelemetry.io/collector/component v0.74.0 // indirect
-	go.opentelemetry.io/collector/confmap v0.74.0 // indirect
-	go.opentelemetry.io/collector/consumer v0.73.0 // indirect
-	go.opentelemetry.io/collector/exporter v0.73.0 // indirect
+	go.opentelemetry.io/collector/component v0.75.0 // indirect
+	go.opentelemetry.io/collector/confmap v0.75.0 // indirect
+	go.opentelemetry.io/collector/consumer v0.75.0 // indirect
+	go.opentelemetry.io/collector/exporter v0.75.0 // indirect
 	go.opentelemetry.io/collector/exporter/otlphttpexporter v0.73.0 // indirect
-	go.opentelemetry.io/collector/featuregate v0.74.0 // indirect
+	go.opentelemetry.io/collector/featuregate v0.75.0 // indirect
 	go.opentelemetry.io/collector/processor/batchprocessor v0.73.0 // indirect
 	go.opentelemetry.io/collector/processor/memorylimiterprocessor v0.73.0 // indirect
-	go.opentelemetry.io/collector/receiver v0.73.0 // indirect
-	go.opentelemetry.io/collector/receiver/otlpreceiver v0.73.0 // indirect
+	go.opentelemetry.io/collector/receiver v0.75.0 // indirect
+	go.opentelemetry.io/collector/receiver/otlpreceiver v0.75.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.40.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.40.0 // indirect
-	go.opentelemetry.io/contrib/propagators/b3 v1.14.0 // indirect
+	go.opentelemetry.io/contrib/propagators/b3 v1.15.0 // indirect
 	go4.org/intern v0.0.0-20211027215823-ae77deb06f29 // indirect
 	go4.org/netipx v0.0.0-20230125063823-8449b0a6169f // indirect
 	go4.org/unsafe/assume-no-moving-gc v0.0.0-20230204201903-c31fa085b70e // indirect
@@ -676,16 +676,16 @@ replace (
 	go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlpexporter
 	go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlphttpexporter
 	go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/pdata
-	
-	// go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin
-	// go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlpexporter
-	// go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlphttpexporter
-	// go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/pdata
-	
-	// go.opentelemetry.io/collector => github.com/grafana/opentelemetry-collector v0.4.1-0.20230314235149-ba3d45807867
-	// go.opentelemetry.io/collector/exporter/otlpexporter => github.com/grafana/opentelemetry-collector/exporter/otlpexporter v0.0.0-20230314235149-ba3d45807867
-	// go.opentelemetry.io/collector/exporter/otlphttpexporter => github.com/grafana/opentelemetry-collector/exporter/otlphttpexporter v0.0.0-20230314235149-ba3d45807867
-	// go.opentelemetry.io/collector/pdata => github.com/grafana/opentelemetry-collector/pdata v0.0.0-20230314235149-ba3d45807867
+
+// go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin
+// go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlpexporter
+// go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlphttpexporter
+// go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/pdata
+
+// go.opentelemetry.io/collector => github.com/grafana/opentelemetry-collector v0.4.1-0.20230314235149-ba3d45807867
+// go.opentelemetry.io/collector/exporter/otlpexporter => github.com/grafana/opentelemetry-collector/exporter/otlpexporter v0.0.0-20230314235149-ba3d45807867
+// go.opentelemetry.io/collector/exporter/otlphttpexporter => github.com/grafana/opentelemetry-collector/exporter/otlphttpexporter v0.0.0-20230314235149-ba3d45807867
+// go.opentelemetry.io/collector/pdata => github.com/grafana/opentelemetry-collector/pdata v0.0.0-20230314235149-ba3d45807867
 )
 
 // Replacement necessary for windows_exporter so that we can use gokit logging and not the old prometheus logging
