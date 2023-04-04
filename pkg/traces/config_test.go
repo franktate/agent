@@ -9,9 +9,10 @@ import (
 	"github.com/grafana/agent/pkg/traces/pushreceiver"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/config"
 	"go.opentelemetry.io/collector/confmap"
-	"go.opentelemetry.io/collector/service/external/configunmarshaler"
+	"go.opentelemetry.io/collector/otelcol/external/configunmarshaler"
 	"gopkg.in/yaml.v2"
 )
 
@@ -1852,7 +1853,7 @@ receivers:
 
 // sortService is a helper function to lexicographically sort all
 // the possibly unsorted elements of a given cfg.Service
-func sortService(cfg *config.Config) {
+func sortService(cfg *component.Config) {
 	sort.Slice(cfg.Service.Extensions, func(i, j int) bool { return cfg.Service.Extensions[i].String() > cfg.Service.Extensions[j].String() })
 
 	for _, pipeline := range cfg.Pipelines {
