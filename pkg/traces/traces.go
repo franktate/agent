@@ -116,8 +116,8 @@ func newLogger(l log.Logger) *zap.Logger {
 }
 
 func newMetricViews(reg prom_client.Registerer) ([]*view.View, error) {
-	obsMetrics := obsreportconfig.Configure(configtelemetry.LevelBasic)
-	err := view.Register(obsMetrics.Views...)
+	obsMetrics := obsreportconfig.AllViews(configtelemetry.LevelBasic)
+	err := view.Register(obsMetrics...)
 	if err != nil {
 		return nil, fmt.Errorf("failed to register views: %w", err)
 	}
@@ -132,5 +132,5 @@ func newMetricViews(reg prom_client.Registerer) ([]*view.View, error) {
 
 	view.RegisterExporter(pe)
 
-	return obsMetrics.Views, nil
+	return obsMetrics, nil
 }

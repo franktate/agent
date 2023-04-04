@@ -12,12 +12,15 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor/mocks"
 	"github.com/stretchr/testify/assert"
 	"go.opentelemetry.io/collector/component"
-	"go.opentelemetry.io/collector/config"
 	"go.opentelemetry.io/collector/confmap"
 	"go.opentelemetry.io/collector/consumer"
+	"go.opentelemetry.io/collector/exporter"
+	"go.opentelemetry.io/collector/extension"
+	"go.opentelemetry.io/collector/otelcol"
 	"go.opentelemetry.io/collector/pdata/ptrace"
+	"go.opentelemetry.io/collector/processor"
+	"go.opentelemetry.io/collector/receiver"
 	"go.opentelemetry.io/collector/receiver/otlpreceiver"
-	"go.opentelemetry.io/collector/service/external/configunmarshaler"
 	"go.opentelemetry.io/collector/service/external/pipelines"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
@@ -96,29 +99,29 @@ service:
 		panic("could not decode config: " + err.Error())
 	}
 
-	extensionsFactory, err := component.MakeExtensionFactoryMap()
+	extensionsFactory, err := extension.MakeFactoryMap()
 	if err != nil {
 		return nil, fmt.Errorf("failed to make extension factory map: %w", err)
 	}
 
-	receiversFactory, err := component.MakeReceiverFactoryMap(otlpreceiver.NewFactory())
+	receiversFactory, err := receiver.MakeFactoryMap(otlpreceiver.NewFactory())
 	if err != nil {
 		return nil, fmt.Errorf("failed to make receiver factory map: %w", err)
 	}
 
-	exportersFactory, err := component.MakeExporterFactoryMap(newNoopExporterFactory())
+	exportersFactory, err := exporter.MakeFactoryMap(newNoopExporterFactory())
 	if err != nil {
 		return nil, fmt.Errorf("failed to make exporter factory map: %w", err)
 	}
 
-	processorsFactory, err := component.MakeProcessorFactoryMap(
+	processorsFactory, err := processor.MakeFactoryMap(
 		newFuncProcessorFactory(callback),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make processor factory map: %w", err)
 	}
 
-	factories := component.Factories{
+	factories := otelcol.Factories{
 		Extensions: extensionsFactory,
 		Receivers:  receiversFactory,
 		Processors: processorsFactory,
@@ -126,6 +129,7 @@ service:
 	}
 
 	configMap := confmap.NewFromStringMap(cfg)
+	//TODO: Check for err
 	otelCfg, err := configunmarshaler.Unmarshal(configMap, factories)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make otel config: %w", err)
@@ -178,19 +182,19 @@ func (s *Server) Stop() error {
 	return s.pipelines.ShutdownAll(shutdownCtx)
 }
 
-func newFuncProcessorFactory(callback func(ptrace.Traces)) component.ProcessorFactory {
-	return component.NewProcessorFactory(
+func newFuncProcessorFactory(callback func(ptrace.Traces)) processor.Factory {
+	return processor.NewFactory(
 		"func_processor",
-		func() config.Processor {
-			processorSettings := config.NewProcessorSettings(config.NewComponentIDWithName("func_processor", "func_processor"))
-			return &processorSettings
+		func() component.Config {
+			//TODO: WHat if there is no default? Can we return nil?
+			return nil
 		},
-		component.WithTracesProcessor(func(
+		processor.WithTraces(func(
 			_ context.Context,
-			_ component.ProcessorCreateSettings,
-			_ config.Processor,
+			_ processor.CreateSettings,
+			_ component.Config,
 			next consumer.Traces,
-		) (component.TracesProcessor, error) {
+		) (processor.Traces, error) {
 
 			return &funcProcessor{
 				Callback: callback,
@@ -219,18 +223,18 @@ func (p *funcProcessor) Capabilities() consumer.Capabilities {
 func (p *funcProcessor) Start(context.Context, component.Host) error { return nil }
 func (p *funcProcessor) Shutdown(context.Context) error              { return nil }
 
-func newNoopExporterFactory() component.ExporterFactory {
-	return component.NewExporterFactory(
+func newNoopExporterFactory() exporter.Factory {
+	return exporter.NewFactory(
 		"noop",
-		func() config.Exporter {
-			exporterSettings := config.NewExporterSettings(config.NewComponentIDWithName("noop", "noop"))
-			return &exporterSettings
+		func() component.Config {
+			//TODO: WHat if there is no default? Can we return nil?
+			return nil
 		},
-		component.WithTracesExporter(func(
+		exporter.WithTraces(func(
 			context.Context,
-			component.ExporterCreateSettings,
-			config.Exporter) (
-			component.TracesExporter,
+			exporter.CreateSettings,
+			component.Config) (
+			exporter.Traces,
 			error) {
 
 			return &noopExporter{}, nil

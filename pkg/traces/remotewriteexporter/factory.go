@@ -6,7 +6,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"go.opentelemetry.io/collector/component"
-	"go.opentelemetry.io/collector/config"
+	"go.opentelemetry.io/collector/exporter"
 )
 
 const (
@@ -15,11 +15,9 @@ const (
 	TypeStr = "remote_write"
 )
 
-var _ config.Exporter = (*Config)(nil)
-
 // Config holds the configuration for the Prometheus remote write processor.
 type Config struct {
-	config.ExporterSettings `mapstructure:",squash"`
+	component.Config `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct.
 
 	ConstLabels  prometheus.Labels `mapstructure:"const_labels"`
 	Namespace    string            `mapstructure:"namespace"`
@@ -32,26 +30,23 @@ type Config struct {
 }
 
 // NewFactory returns a new factory for the Prometheus remote write processor.
-func NewFactory() component.ExporterFactory {
-	return component.NewExporterFactory(
+func NewFactory() exporter.Factory {
+	return exporter.NewFactory(
 		TypeStr,
 		createDefaultConfig,
-		component.WithMetricsExporter(createMetricsExporter, component.StabilityLevelUndefined),
+		exporter.WithMetrics(createMetricsExporter, component.StabilityLevelUndefined),
 	)
 }
 
-func createDefaultConfig() config.Exporter {
-	return &Config{
-		ExporterSettings: config.NewExporterSettings(config.NewComponentIDWithName(TypeStr, TypeStr)),
-	}
+func createDefaultConfig() component.Config {
+	return &Config{}
 }
 
 func createMetricsExporter(
 	_ context.Context,
-	_ component.ExporterCreateSettings,
-	cfg config.Exporter,
-) (component.MetricsExporter, error) {
-
+	_ exporter.CreateSettings,
+	cfg component.Config,
+) (exporter.Metrics, error) {
 	eCfg := cfg.(*Config)
 	return newRemoteWriteExporter(eCfg)
 }

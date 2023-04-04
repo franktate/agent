@@ -13,7 +13,6 @@ import (
 	"go.opentelemetry.io/collector/otelcol"
 	"go.opentelemetry.io/collector/service"
 	"go.opentelemetry.io/collector/service/extensions"
-	"go.opentelemetry.io/collector/service/external/pipelines"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
@@ -190,8 +189,8 @@ func (i *Instance) buildAndStartPipeline(ctx context.Context, cfg InstanceConfig
 		BuildInfo: appinfo,
 
 		Factories: factories.Extensions,
-		Configs:   otelConfig.Exensions,
-	}, otelConfig.Service.Extensions)
+		Configs:   otelConfig,
+	}, otelConfig.Extensions)
 	if err != nil {
 		i.logger.Error(fmt.Sprintf("failed to build extensions: %s", err.Error()))
 		return fmt.Errorf("failed to create extensions builder: %w", err)
