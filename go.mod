@@ -672,10 +672,20 @@ exclude google.golang.org/grpc/examples v0.0.0-20200728065043-dfc0c05b2da9
 // Some funtionalities of the collector have been made internal and it's more difficult to build and configure pipelines in the newer versions.
 // This is a temporary solution while a new configuration design is discussed for the collector (ref: https://github.com/open-telemetry/opentelemetry-collector/issues/3482).
 replace (
-	go.opentelemetry.io/collector => github.com/grafana/opentelemetry-collector v0.4.1-0.20230314235149-ba3d45807867
-	go.opentelemetry.io/collector/exporter/otlpexporter => github.com/grafana/opentelemetry-collector/exporter/otlpexporter v0.0.0-20230314235149-ba3d45807867
-	go.opentelemetry.io/collector/exporter/otlphttpexporter => github.com/grafana/opentelemetry-collector/exporter/otlphttpexporter v0.0.0-20230314235149-ba3d45807867
-	go.opentelemetry.io/collector/pdata => github.com/grafana/opentelemetry-collector/pdata v0.0.0-20230314235149-ba3d45807867
+	go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin
+	go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlpexporter
+	go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlphttpexporter
+	go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/pdata
+	
+	// go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin
+	// go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlpexporter
+	// go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlphttpexporter
+	// go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/pdata
+	
+	// go.opentelemetry.io/collector => github.com/grafana/opentelemetry-collector v0.4.1-0.20230314235149-ba3d45807867
+	// go.opentelemetry.io/collector/exporter/otlpexporter => github.com/grafana/opentelemetry-collector/exporter/otlpexporter v0.0.0-20230314235149-ba3d45807867
+	// go.opentelemetry.io/collector/exporter/otlphttpexporter => github.com/grafana/opentelemetry-collector/exporter/otlphttpexporter v0.0.0-20230314235149-ba3d45807867
+	// go.opentelemetry.io/collector/pdata => github.com/grafana/opentelemetry-collector/pdata v0.0.0-20230314235149-ba3d45807867
 )
 
 // Replacement necessary for windows_exporter so that we can use gokit logging and not the old prometheus logging
