@@ -3561,6 +3561,7 @@ go.opentelemetry.io/collector/semconv v0.63.1 h1:o9Zz/vwqT85XXYf9XTIXa0qkmfEY8b/
 go.opentelemetry.io/collector/semconv v0.63.1/go.mod h1:5o9yhOa+ABt7g2E5JABDxGZ1PQPbtfxrKNbYn+LOTXU=
 go.opentelemetry.io/collector/semconv v0.73.0 h1:gF4f6z1q8YfWzzo/gPKysjFmmM4Pv4nC2bWrTPxTPaE=
 go.opentelemetry.io/collector/semconv v0.73.0/go.mod h1:xt8oDOiwa1jy24tGUo8+SzpphI7ZredS2WM/0m8rtTA=
+go.opentelemetry.io/collector/semconv v0.75.0 h1:zIlZk+zh1bgc3VKE1PZEmhOaVa4tQHZMcFFUXmGekVs=
 go.opentelemetry.io/collector/semconv v0.75.0/go.mod h1:xt8oDOiwa1jy24tGUo8+SzpphI7ZredS2WM/0m8rtTA=
 go.opentelemetry.io/contrib v0.20.0 h1:ubFQUn0VCZ0gPwIoJfBJVpeBlyRMxu8Mm/huKWYd9p0=
 go.opentelemetry.io/contrib v0.20.0/go.mod h1:G/EtFaa6qaN7+LxqfIAT3GiZa7Wv5DTBUzl5H4LY0Kc=

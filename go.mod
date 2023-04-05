@@ -92,8 +92,8 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/bearertokenauthextension v0.73.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/headerssetterextension v0.73.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/oauth2clientauthextension v0.73.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/stanza v0.63.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/loki v0.63.0
+	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/stanza v0.73.0
+	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/loki v0.73.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/prometheus v0.73.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/attributesprocessor v0.73.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor v0.73.0
@@ -677,20 +677,20 @@ replace (
 	go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin-f/exporter/otlphttpexporter
 	go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin-f/pdata
 
-	// go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin
-	// go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlpexporter
-	// go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlphttpexporter
-	// go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/pdata
+// go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin
+// go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlpexporter
+// go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/exporter/otlphttpexporter
+// go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-paulin/pdata
 
-	// go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin
-	// go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlpexporter
-	// go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlphttpexporter
-	// go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/pdata
-	
-	// go.opentelemetry.io/collector => github.com/grafana/opentelemetry-collector v0.4.1-0.20230314235149-ba3d45807867
-	// go.opentelemetry.io/collector/exporter/otlpexporter => github.com/grafana/opentelemetry-collector/exporter/otlpexporter v0.0.0-20230314235149-ba3d45807867
-	// go.opentelemetry.io/collector/exporter/otlphttpexporter => github.com/grafana/opentelemetry-collector/exporter/otlphttpexporter v0.0.0-20230314235149-ba3d45807867
-	// go.opentelemetry.io/collector/pdata => github.com/grafana/opentelemetry-collector/pdata v0.0.0-20230314235149-ba3d45807867
+// go.opentelemetry.io/collector => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin
+// go.opentelemetry.io/collector/exporter/otlpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlpexporter
+// go.opentelemetry.io/collector/exporter/otlphttpexporter => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/exporter/otlphttpexporter
+// go.opentelemetry.io/collector/pdata => /Users/paulintodev/Documents/GitHub/opentelemetry-collector-grafana-paulin/pdata
+
+// go.opentelemetry.io/collector => github.com/grafana/opentelemetry-collector v0.4.1-0.20230314235149-ba3d45807867
+// go.opentelemetry.io/collector/exporter/otlpexporter => github.com/grafana/opentelemetry-collector/exporter/otlpexporter v0.0.0-20230314235149-ba3d45807867
+// go.opentelemetry.io/collector/exporter/otlphttpexporter => github.com/grafana/opentelemetry-collector/exporter/otlphttpexporter v0.0.0-20230314235149-ba3d45807867
+// go.opentelemetry.io/collector/pdata => github.com/grafana/opentelemetry-collector/pdata v0.0.0-20230314235149-ba3d45807867
 )
 
 // Replacement necessary for windows_exporter so that we can use gokit logging and not the old prometheus logging

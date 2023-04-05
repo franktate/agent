@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"go.opentelemetry.io/collector/component"
-	"go.opentelemetry.io/collector/config"
 	"go.opentelemetry.io/collector/consumer"
+	"go.opentelemetry.io/collector/processor"
 )
 
 const (
@@ -23,7 +23,7 @@ const (
 
 // Config holds the configuration for the Prometheus service graph processor.
 type Config struct {
-	config.ProcessorSettings `mapstructure:",squash"`
+	component.Config `mapstructure:",squash"`
 
 	Wait     time.Duration `mapstructure:"wait"`
 	MaxItems int           `mapstructure:"max_items"`
@@ -39,26 +39,24 @@ type successCodes struct {
 }
 
 // NewFactory returns a new factory for the Prometheus service graph processor.
-func NewFactory() component.ProcessorFactory {
-	return component.NewProcessorFactory(
+func NewFactory() processor.Factory {
+	return processor.NewFactory(
 		TypeStr,
 		createDefaultConfig,
-		component.WithTracesProcessor(createTracesProcessor, component.StabilityLevelUndefined),
+		processor.WithTraces(createTracesProcessor, component.StabilityLevelUndefined),
 	)
 }
 
-func createDefaultConfig() config.Processor {
-	return &Config{
-		ProcessorSettings: config.NewProcessorSettings(config.NewComponentIDWithName(TypeStr, TypeStr)),
-	}
+func createDefaultConfig() component.Config {
+	return &Config{}
 }
 
 func createTracesProcessor(
 	_ context.Context,
-	_ component.ProcessorCreateSettings,
-	cfg config.Processor,
+	_ processor.CreateSettings,
+	cfg component.Config,
 	nextConsumer consumer.Traces,
-) (component.TracesProcessor, error) {
+) (processor.Traces, error) {
 
 	eCfg := cfg.(*Config)
 	return newProcessor(nextConsumer, eCfg), nil
