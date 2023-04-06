@@ -24,18 +24,17 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver"
 	"github.com/prometheus/client_golang/prometheus"
 	prom_config "github.com/prometheus/common/config"
-	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/component/componenttest"
 	"go.opentelemetry.io/collector/confmap"
+	otelexporter "go.opentelemetry.io/collector/exporter"
 	"go.opentelemetry.io/collector/exporter/otlpexporter"
 	"go.opentelemetry.io/collector/exporter/otlphttpexporter"
 	"go.opentelemetry.io/collector/extension"
 	"go.opentelemetry.io/collector/otelcol"
-	"go.opentelemetry.io/collector/otelcol/external/configunmarshaler"
+	otelprocessor "go.opentelemetry.io/collector/processor"
 	"go.opentelemetry.io/collector/processor/batchprocessor"
 	"go.opentelemetry.io/collector/receiver"
 	"go.opentelemetry.io/collector/receiver/otlpreceiver"
-	"go.opentelemetry.io/collector/service"
 	"go.uber.org/multierr"
 
 	"github.com/grafana/agent/pkg/logs"
@@ -578,7 +577,7 @@ func formatPolicies(cfg []policy) ([]map[string]interface{}, error) {
 	return policies, nil
 }
 
-func (c *InstanceConfig) otelConfig() (*service.Config, error) {
+func (c *InstanceConfig) otelConfig() (*otelcol.Config, error) {
 	otelMapStructure := map[string]interface{}{}
 
 	if len(c.Receivers) == 0 {
@@ -804,11 +803,14 @@ func (c *InstanceConfig) otelConfig() (*service.Config, error) {
 	}
 
 	configMap := confmap.NewFromStringMap(otelMapStructure)
-	otelCfg, err := configunmarshaler.Unmarshal(configMap, factories)
+	otelCfg, err := otelcol.Unmarshal(configMap, factories)
 	if err != nil {
 		return nil, fmt.Errorf("failed to load OTel config: %w", err)
 	}
 
+	if err := otelCfg.Validate(); err != nil {
+		return nil, err
+	}
 	return otelCfg, nil
 }
 
@@ -835,7 +837,7 @@ func tracingFactories() (otelcol.Factories, error) {
 		return otelcol.Factories{}, err
 	}
 
-	exporters, err := component.MakeExporterFactoryMap(
+	exporters, err := otelexporter.MakeFactoryMap(
 		otlpexporter.NewFactory(),
 		otlphttpexporter.NewFactory(),
 		jaegerexporter.NewFactory(),
@@ -847,7 +849,7 @@ func tracingFactories() (otelcol.Factories, error) {
 		return otelcol.Factories{}, err
 	}
 
-	processors, err := component.MakeProcessorFactoryMap(
+	processors, err := otelprocessor.MakeFactoryMap(
 		batchprocessor.NewFactory(),
 		attributesprocessor.NewFactory(),
 		promsdprocessor.NewFactory(),

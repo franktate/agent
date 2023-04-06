@@ -83,7 +83,7 @@ type fakeAuthArgs struct {
 var _ auth.Arguments = fakeAuthArgs{}
 
 func (fa fakeAuthArgs) Convert() (otelcomponent.Config, error) {
-	return nil
+	return nil, nil
 }
 
 func (fa fakeAuthArgs) Extensions() map[otelcomponent.ID]otelextension.Extension {

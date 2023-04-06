@@ -10,6 +10,7 @@ import (
 	"github.com/grafana/agent/pkg/river"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/jaegerexporter"
 	otelcomponent "go.opentelemetry.io/collector/component"
+	"go.opentelemetry.io/collector/config/configopaque"
 	otelpexporterhelper "go.opentelemetry.io/collector/exporter/exporterhelper"
 	otelextension "go.opentelemetry.io/collector/extension"
 )
@@ -88,7 +89,7 @@ var _ river.Unmarshaler = (*GRPCClientArguments)(nil)
 // DefaultGRPCClientArguments holds component-specific default settings for
 // GRPCClientArguments.
 var DefaultGRPCClientArguments = GRPCClientArguments{
-	Headers:         map[string]string{},
+	Headers:         map[string]configopaque.String{},
 	Compression:     otelcol.CompressionTypeGzip,
 	WriteBufferSize: 512 * 1024,
 }

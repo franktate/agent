@@ -7,6 +7,7 @@ import (
 	"github.com/grafana/agent/pkg/flow/rivertypes"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension"
 	otelcomponent "go.opentelemetry.io/collector/component"
+	"go.opentelemetry.io/collector/config/configopaque"
 	otelextension "go.opentelemetry.io/collector/extension"
 )
 
@@ -38,7 +39,7 @@ func (args Arguments) Convert() (otelcomponent.Config, error) {
 	return &basicauthextension.Config{
 		ClientAuth: &basicauthextension.ClientAuthSettings{
 			Username: args.Username,
-			Password: string(args.Password),
+			Password: configopaque.String(args.Password),
 		},
 	}, nil
 }

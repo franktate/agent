@@ -156,7 +156,7 @@ type fakeProcessorArgs struct {
 var _ processor.Arguments = fakeProcessorArgs{}
 
 func (fa fakeProcessorArgs) Convert() (otelcomponent.Config, error) {
-	return nil
+	return nil, nil
 }
 
 func (fa fakeProcessorArgs) Extensions() map[otelcomponent.ID]otelextension.Extension {

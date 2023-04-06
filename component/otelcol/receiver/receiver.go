@@ -70,7 +70,7 @@ var (
 // If the registered Flow component registers exported fields, it is the
 // responsibility of the caller to export values when needed; the Receiver
 // component never exports any values.
-func New(opts component.Options, f otelcomponent.Factory, args Arguments) (*Receiver, error) {
+func New(opts component.Options, f otelreceiver.Factory, args Arguments) (*Receiver, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	// Create a lazy collector where metrics from the upstream component will be

@@ -70,7 +70,7 @@ func (args Arguments) Convert() (otelcomponent.Config, error) {
 		Timeout:          args.Timeout,
 		SendBatchSize:    args.SendBatchSize,
 		SendBatchMaxSize: args.SendBatchMaxSize,
-	}
+	}, nil
 }
 
 // Extensions implements processor.Arguments.

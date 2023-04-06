@@ -38,7 +38,7 @@ func (args Arguments) Convert() (otelcomponent.Config, error) {
 		Scheme:      args.Scheme,
 		BearerToken: args.Token,
 		Filename:    args.Filename,
-	}
+	}, nil
 }
 
 // Extensions implements auth.Arguments.

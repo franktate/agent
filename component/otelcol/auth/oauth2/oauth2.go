@@ -49,7 +49,7 @@ func (args Arguments) Convert() (otelcomponent.Config, error) {
 		Scopes:         args.Scopes,
 		TLSSetting:     *args.TLSSetting.Convert(),
 		Timeout:        args.Timeout,
-	}
+	}, nil
 }
 
 // Extensions implements auth.Arguments.

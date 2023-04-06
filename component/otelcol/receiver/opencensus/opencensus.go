@@ -59,9 +59,10 @@ func (args *Arguments) UnmarshalRiver(f func(interface{}) error) error {
 }
 
 // Convert implements receiver.Arguments.
-func (args Arguments) Convert() (otelcomponent.ReceiverConfig, error) {
+func (args Arguments) Convert() (otelcomponent.Config, error) {
 	return &opencensusreceiver.Config{
-		ReceiverSettings: otelcomponent.NewReceiverConfigSettings(otelcomponent.NewID("opencensus")),
+		//TODO: Should we replace this with something?
+		// ReceiverSettings: otelcomponent.NewReceiverConfigSettings(otelcomponent.NewID("opencensus")),
 
 		CorsOrigins:        args.CorsAllowedOrigins,
 		GRPCServerSettings: *args.GRPC.Convert(),
@@ -74,7 +75,7 @@ func (args Arguments) Extensions() map[otelcomponent.ID]extension.Extension {
 }
 
 // Exporters implements receiver.Arguments.
-func (args Arguments) Exporters() map[otelconfig.DataType]map[otelconfig.ComponentID]otelcomponent.Exporter {
+func (args Arguments) Exporters() map[otelcomponent.DataType]map[otelcomponent.ID]otelcomponent.Component {
 	return nil
 }
 

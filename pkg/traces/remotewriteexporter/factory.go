@@ -17,8 +17,6 @@ const (
 
 // Config holds the configuration for the Prometheus remote write processor.
 type Config struct {
-	component.Config `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct.
-
 	ConstLabels  prometheus.Labels `mapstructure:"const_labels"`
 	Namespace    string            `mapstructure:"namespace"`
 	PromInstance string            `mapstructure:"metrics_instance"`

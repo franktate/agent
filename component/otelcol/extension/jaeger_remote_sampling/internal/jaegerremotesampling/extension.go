@@ -24,7 +24,6 @@ import (
 	"go.opentelemetry.io/collector/component"
 	otelextension "go.opentelemetry.io/collector/extension"
 	"go.uber.org/zap"
-	"google.golang.org/grpc"
 
 	"github.com/grafana/agent/component/otelcol/extension/jaeger_remote_sampling/internal/jaegerremotesampling/internal"
 	"github.com/grafana/agent/component/otelcol/extension/jaeger_remote_sampling/internal/strategy_store"
@@ -74,11 +73,7 @@ func (jrse *jrsExtension) Start(ctx context.Context, host component.Host) error 
 	}
 
 	if jrse.cfg.Source.Remote != nil {
-		opts, err := jrse.cfg.Source.Remote.ToDialOptions(host, jrse.telemetry)
-		if err != nil {
-			return fmt.Errorf("error while setting up the remote sampling source: %w", err)
-		}
-		conn, err := grpc.Dial(jrse.cfg.Source.Remote.Endpoint, opts...)
+		conn, err := jrse.cfg.Source.Remote.ToClientConn(context.Background(), host, jrse.telemetry)
 		if err != nil {
 			return fmt.Errorf("error while connecting to the remote sampling source: %w", err)
 		}

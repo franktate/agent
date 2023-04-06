@@ -6,7 +6,7 @@ import (
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/consumer"
-	"go.opentelemetry.io/collector/processor"
+	otelprocessor "go.opentelemetry.io/collector/processor"
 )
 
 const (
@@ -38,12 +38,12 @@ type successCodes struct {
 	grpc []int64 `mapstructure:"grpc"`
 }
 
-// NewFactory returns a new factory for the Prometheus service graph processor.
-func NewFactory() processor.Factory {
-	return processor.NewFactory(
+// NewFactory returns a new factory for the Prometheus service graph otelprocessor.
+func NewFactory() otelprocessor.Factory {
+	return otelprocessor.NewFactory(
 		TypeStr,
 		createDefaultConfig,
-		processor.WithTraces(createTracesProcessor, component.StabilityLevelUndefined),
+		otelprocessor.WithTraces(createTracesProcessor, component.StabilityLevelUndefined),
 	)
 }
 
@@ -53,10 +53,10 @@ func createDefaultConfig() component.Config {
 
 func createTracesProcessor(
 	_ context.Context,
-	_ processor.CreateSettings,
+	_ otelprocessor.CreateSettings,
 	cfg component.Config,
 	nextConsumer consumer.Traces,
-) (processor.Traces, error) {
+) (otelprocessor.Traces, error) {
 
 	eCfg := cfg.(*Config)
 	return newProcessor(nextConsumer, eCfg), nil

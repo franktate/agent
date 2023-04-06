@@ -127,7 +127,7 @@ type fakeExporterArgs struct {
 var _ exporter.Arguments = fakeExporterArgs{}
 
 func (fa fakeExporterArgs) Convert() (otelcomponent.Config, error) {
-	return nil
+	return nil, nil
 }
 
 func (fa fakeExporterArgs) Extensions() map[otelcomponent.ID]otelextension.Extension {

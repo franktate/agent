@@ -113,7 +113,7 @@ type fakeReceiverArgs struct {
 var _ receiver.Arguments = fakeReceiverArgs{}
 
 func (fa fakeReceiverArgs) Convert() (otelcomponent.Config, error) {
-	return nil
+	return nil, nil
 }
 
 func (fa fakeReceiverArgs) Extensions() map[otelcomponent.ID]otelextension.Extension {
